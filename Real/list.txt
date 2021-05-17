@@ -1,0 +1,15 @@
+To fix
+-Register.php does not insert info
+-blob not working
+-Special char not working
+
+
+To do 
+
+Links/jointure
+security-injections//regex avec requete prep
+system of likes/dislike
+
+Finish off
+-Modify account
+comment system (after homepage is working)
