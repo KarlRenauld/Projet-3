@@ -1,5 +1,4 @@
 To fix
--Register.php does not insert info
 -blob not working
 -Special char not working
 
@@ -7,9 +6,20 @@ To fix
 To do 
 
 Links/jointure
-security-injections//regex avec requete prep
+security-injections
 system of likes/dislike
 
 Finish off
 -Modify account
 comment system (after homepage is working)
+
+
+
+
+blob =/ stockage URl repertoire image
+
+recup donner / afficher avec html / 
+
+jointure /clef externe
+
+/security / ADMIN

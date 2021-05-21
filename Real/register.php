@@ -33,7 +33,6 @@ if (isset($_POST['username'], $_POST['prenom'], $_POST['password'], $_POST['nom'
     // At least one digit [0-9]
     //At least one lowercase character [a-z]
     //At least one uppercase character [A-Z]
-    //At least one special character [*.!@#$%^&(){}[]:;<>,.?/~_+-=|\]
     //At least 8 characters in length, but no more than 32.
     $password = $_POST['password'];
 
@@ -45,7 +44,7 @@ if (isset($_POST['username'], $_POST['prenom'], $_POST['password'], $_POST['nom'
     {
         echo "Mot de passe pas assez puissant.";
     }
-    
+    //Add Prepared statement once Account_mod.php done
     //requéte SQL + mot de passe crypté
     $query = "INSERT into `users` (username, prenom, nom, reponse, question, password)
               VALUES ('$username', '$prenom', '$nom', '$reponse','$question', '".hash('sha256', $password)."')";

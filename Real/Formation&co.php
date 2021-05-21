@@ -9,21 +9,23 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="style.css" />
-    <meta charset='utf8_general_ci'>
-  </head>
-  <body>
-    <div class="sucess">
+<head>
+	<title>Formation&Co</title>
+</head>
+<body>
+
+ <div class="sucess">
     <h1>Bienvenue <?php echo $_SESSION['username']; ?>!</h1>
-    <p>C'est votre tableau de bord.</p>
+    <p></p>
     <a href="logout.php">Déconnexion</a>
     <br>
     <a href="account_mod.php">Modifier Compte</a>
     </div>
 
-      <h1>Acteurs</h1>  
-        <?php
+    <div id=logoActeur class="logoActeur">
+    	<br>    
+        <img src='Images/formation_co.png'  alt= 'Logo Acteur'; title='' width="400px"/> </div>
+     <?php
        $servername = 'localhost';
        $username = 'root';
        $password = '';
@@ -34,20 +36,34 @@
        if ($conn->connect_error) {
         die('connection failed' . $conn->connect_error);
        }
-       $sql = ('SELECT acteur, description FROM acteurs ');
+
+       $sql = 'SELECT description FROM acteurs WHERE id = 1 ';
+       if ($result = $conn -> query($sql)) {
+       	while ($row = $result -> fetch_row()) {
+       		printf($row[1]);
+       		$result -> free_result();
+       		# code...
+       	}
+       	# code...
+       }
+       $result = $conn->query($sql);
+
        
+
+       //---------------//
+
+        $sql = 'SELECT acteur, description FROM acteurs WHERE Id_acteur = 1';
        $result = $conn-> query($sql);
 
        if ($result->num_rows > 0) {
         //show data
         while ($row = $result -> fetch_assoc()) {
-            echo "Acteur: " .$row['acteur']. '<br><br>',  "Description: " .$row['description']. '<br>','<br>' ;
-           
+            echo "Acteur: " .$row['acteur']. '<br><br>',  "Description: " .$row['description']. '<br>' ;
+  }
+
         }
           
-       }
-        ?>
-<img src="images/cde.png">
-<a href="section_commentaire.php"> test $_GET</a>
-  </body>
+       
+       ?>
+</body>
 </html>

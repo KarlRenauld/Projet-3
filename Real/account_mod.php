@@ -12,40 +12,6 @@
   <head>
   <link rel="stylesheet" href="style.css" />
   </head>
-
-  <?php 
-    $servname = "localhost"; $dbname = "extranet"; $user = "root"; $pass = "";
-            
-              try{
-                $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
-                // set the PDO error mode to exception
-                $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              //$_Post has not loaded since the form has not yet run?
-
-              //Prepare to bind 
-               $SQL= $dbco->prepare("UPDATE users Set username=?,question=?, reponse=?, password=?, WHERE  ");
-               //WHERE $_SESSION['username']??.
-
-
-                // One 's' for each string to modify
-                //$--- are variables from the HTML/form
-                 //These values will replace the '?' in prepare function
-                 $SQL->bindparam('ssss',$_POST['username'], $_POST['question'], $_POST['answer'], $_POST['password']);
-
-                $SQL->execute();
-
-                $message = "Modification Reussit";
-              }
-  //catch exception
-  catch(Exception $e) {
-  echo 'Message: ' .$e->getMessage();
-
-  
-   ?>
-   <?php
-  }
-
-  ?>
   <body>
     <div class="sucess">
     <h1>Bienvenue <?php echo $_SESSION['username']; ?>!</h1>
@@ -58,22 +24,70 @@
 
             <h1 class="box-title">Modifier Compte</h1>
 
-            <input type="text" class="box-input" name="username" placeholder="Nom d'utilisateur" required />
+            <input type="text" class="box-input" name="username" placeholder="Nom d'utilisateur" id="username"  />
 
-            <input type="text" class="box-input" name="nom" placeholder="Nom" required />
+            <input type="text" class="box-input" name="question" placeholder="Question Secrete" id="question"  />
 
-            <input type="text" class="box-input" name="prenom" placeholder="prenom" required />
+            <input type="text" class="box-input" name="reponse" id="reponse" placeholder="Reponse Secrete"  />
 
-            <input type="text" class="box-input" name="question" placeholder="Question Secrete" required />
+            <input type="password" class="box-input" name="password" placeholder="Mot de passe" id="password"  />
 
-            <input type="text" class="box-input" name="reponse" placeholder="Reponse Secrete" required />
-
-            <input type="password" class="box-input" name="password" placeholder="Mot de passe" required />
+            <input type="password" class="box-input" name="password" placeholder=" Confirmation du mot de passe" id="password2"  />
 
             <input type="submit" name="submit" value="Valider Modification" class="box-button" />
         </form>
+
+  <?php 
+     
+       $servername = 'localhost';
+       $username = 'root';
+       $password = '';
+       $dbname = 'extranet'; 
+       //create connection
+       $conn = new mysqli($servername,$username,$password,$dbname);
+       //check connection
+       if ($conn->connect_error) {
+        die('connection failed' . $conn->connect_error);
+       }
+       
+       //USername modification section
+       
+
+       //Password modification section
+       $req = "SELECT * FROM users WHERE username = ".$_SESSION['username']."";
+        $requser = $conn -> prepare($req);
+
+        if (isset($_POST['password']) && isset($_POST['password2']) AND !empty($_POST['password']) AND !empty($_POST['password2']))
+{
+ 
+        if ($_POST['password'] == $_POST['password2'])
+     {
+        echo $_POST['password'];
+    $remplace_MDP = password_hash($_POST['password']);
+    $ModificationMDP= "UPDATE users SET password='" . $remplace_MDP . "' WHERE username='" . $_SESSION['username'] . "'; ";
+    $resultat=$bdd->prepare($ModificationMDP);
+    $resultat->execute();
+   
+    echo "Votre MDP a été changé";
+ 
+        }
+        else
+        {
+                $msg = "Vos deux mots de passe ne correspondent pas !";
+        }
+       
+      
+}
+
+
+        
+       
+        
+
+
+  ?>
+ 
      
         
   </body>
 </html>
-    
