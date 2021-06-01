@@ -1,0 +1,51 @@
+/*body{
+    background-color: red;
+}*/
+body {
+    height: 100vh;
+    min-height: -webkit-fill-available;
+    line-height: 1.5;
+    
+    background-image: url("Subtle-Prism.svg");
+    background-size: auto; 
+
+    
+    color: black;
+}
+#container_header {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	border: 2px solid black;
+	height: fill;
+ 	min-height: auto;
+ 	width: auto;
+ 	min-width: auto;
+ 	background-color: #EDF3FB;
+}
+
+.account_box{
+	text-align: right;
+	display: flex;
+	flex-direction: column;
+	flex: space-around;
+	align-content: right;
+	height: fill;
+ 	min-height: 100px;
+ 	width: 85%;
+ 	min-width: 50%;
+ 	background-color: #EDF3FB;
+ 	 width: 100%;
+
+}
+.form-box {
+    
+    padding: 10px;
+    margin: 30px 50px;
+    background-color: #EDF3FB;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transition: 0.3s;
+    border: 2px solid black;
+}
+

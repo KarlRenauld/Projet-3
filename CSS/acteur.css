@@ -1,0 +1,190 @@
+/* Comment after like/dislike */
+
+.comment-name {
+    font-weight: bold;
+}
+
+.comment-date {
+    font-size: small;
+}
+
+.comment-text {
+    margin: 10px 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin-bottom: 30px;
+    padding: 20px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background: #e7d2cc41;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.comments-list {
+    background: #e7d2cc41;
+    padding: 30px;
+    text-align: left;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+/* Modify_account/Login/Forget_acc form */
+
+.form-box h1 {
+    color: black;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.form-box {
+    padding: 40px;
+    position: relative;
+    background-color: transparent;
+    text-align: center;
+    /* Take all the place in the page */
+    z-index: 100;
+}
+
+select {
+    text-align-last: center;
+}
+
+select,
+.form-box input[type="text"],
+.form-box input[type="password"],
+.comment-form input[type="text"],
+.comment-form input[type="date"],
+textarea {
+    width: 400px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 5px auto;
+    text-align: center;
+    border: 2px solid var(--color-1);
+    padding: 12px 10px;
+    outline: none;
+    color: blue;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+select:focus,
+textarea:focus,
+.form-box input[type="text"]:focus,
+.form-box input[type="password"]:focus,
+.comment-form input[type="text"]:focus,
+.comment-form input[type="date"]:focus {
+    width: 450px;
+    border-color: #189AB4;
+}
+
+.form-box input[type="submit"],
+.comment-form input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #189AB4;
+    padding: 12px 40px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.form-box input[type="submit"]:hover,
+.comment-form input[type="submit"]:hover {
+    background: #189AB4;
+    color: white;
+}
+.vote_like,
+.vote_dislike {
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    margin: 0 0 0 10px;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.vote_like:hover,
+.is-liked .vote_like {
+    color: green;
+}
+
+.vote_dislike:hover,
+.is-disliked .vote_dislike {
+    color: red;
+}
+
+.vote-comment-btns {
+    margin-right: 20px;
+    text-align: right;
+}
+
+.comment_btn {
+    margin-right: 120px;
+}
+
+.btnOnClick {
+    padding: 10px 10px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid var(--color-1);
+}
+
+.btnOnClick:hover {
+    color: white;
+    background-color: #012f33;
+}
+
+.vote_btns {
+    text-align: right;
+}
+
+.vote_btns form {
+    display: inline-block;
+}
+
+.vote_btn {
+    display: inline-block;
+}
+
+.post {
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.large-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.post h2 {
+    text-align: center;
+}
+
+.post .post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+
+

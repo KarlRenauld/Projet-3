@@ -1,0 +1,13 @@
+#head{
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    flex: space-around;
+    align-content: right;
+    height: fill;
+    min-height: 100px;
+    width: 85%;
+    min-width: 50%;
+    background-color: #EDF3FB;
+     width: 100%;
+}
