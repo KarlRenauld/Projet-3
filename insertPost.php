@@ -4,6 +4,7 @@
   if (isset($_COOKIE['acteur_id'])) {
      echo "value is :" . $_COOKIE['acteur_id'];
     try {
+      //If any of the area is empty 
       if ($_POST['author'] == '' || $_POST['date'] == '' || $_POST['comment'] == '')  {
         throw new Exception("veuillez remplir tous les champs avant d'envoyer");
       } else {

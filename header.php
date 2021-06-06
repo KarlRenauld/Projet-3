@@ -9,10 +9,11 @@
     	
     </div>
 
-    <div class="account_box"><h3>Bienvenue <?php echo $_SESSION['username']; ?>!</h3>
+    <div class="account_box"><h3>Bienvenue <?php echo $_SESSION['firstname'];?> <?php  echo $_SESSION['lastname']; ?>!</h3>
     
     <a href="logout.php">Déconnexion</a>
     <br>
     <a href="account_mod.php">Modifier Compte</a>
+    <br>
     <a href="index.php">Accueil</a>
     </div></section>

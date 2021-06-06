@@ -10,7 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>acteurs</title>
+  <title>Acteurs </title>
+  <?php include_once('header.php');?>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="CSS/acteurs.css">
   <meta charset="utf-8">
 </head>
@@ -27,24 +29,14 @@
       //Set Cookies for use in getting information  during insertPost.php
       setcookie("acteur_id", $_GET['acteur'], time()+(60*60*24));
 
-      include_once('config.php');
-      include_once('Vote.php');
-
-      // Show if the user voted for this acteur, green or red
-      //Vote::getClass($vote)
-      $vote = false;
-      $reqVote = $connection->prepare('SELECT * FROM votes WHERE ref=? AND ref_id=? AND user_id=(SELECT id FROM accounts WHERE username=?)');
-      $reqVote->execute(['acteurs', $_GET['acteur'], $_SESSION['username']]);
-
-      $vote = $reqVote->fetch();
-
+      
       // Get the acteur by id
       $req = $connection->prepare('SELECT * FROM acteurs WHERE id=?');
       $req->execute([$_GET['acteur']]);
       $data = $req->fetch();
 
-      include_once('header.php');
-      // var_dump($data);
+      
+      
       ?>
       <!-- Acteur's post -->
         <article class="post">
@@ -59,52 +51,53 @@
             <?php echo nl2br(htmlspecialchars($data['description'])); ?>
           </p>
           <br>
-          <!-- Votes and comment btn -->
-          
+          <!-- Votes -->
+          <?php
+            
+            $get_id = htmlspecialchars($_GET['acteur']);
+            $article = $connection->prepare('SELECT * FROM acteurs WHERE id = ?');
+            $article->execute(array($get_id));
+            if($article->rowCount() == 1) {
+              $article = $article->fetch();
+              $id = $article['id'];
+             
+              $likes = $connection->prepare('SELECT id FROM likes WHERE id_article = ?');
+              $likes->execute(array($id));
+              $likes = $likes->rowCount();
+              $dislikes = $connection->prepare('SELECT id FROM dislikes WHERE id_article = ?');
+              $dislikes->execute(array($id));
+              $dislikes = $dislikes->rowCount();
+            } 
+             else {
+                die('Cet article n\'existe pas !');
+              }
+          ?>
+
          <div class="vote-comment-btns">
-            <div class="vote_btns <?= Vote::getClass($vote) ?>">
-              <form action="insertVote.php?ref=acteurs&ref_id=<?= $data['id']; ?>&vote=1" method="POST">
-                <button type="submit" class="vote_btn vote_like">
-                  <i class="fas fa-thumbs-up"></i>Likes: &nbsp;<?= $data['like_count'] ?>
+            <div class="">
+              <form action="insertVote.php?t=1&id=<?= $id ?>" method="POST">
+                <button type="submit" class="vote_btn vote_like ">
+                  <i class="fas fa-thumbs-up"></i>Likes: &nbsp;(<?= $likes ?>)
                 </button>
               </form>
-              <form action="insertVote.php?ref=acteurs&ref_id=<?= $data['id']; ?>&vote=-1" method="POST">
+              <form action="insertVote.php?t=2&id=<?= $id ?>" method="POST">
                 <button type="submit" class="vote_btn vote_dislike">
-                  <i class="fa fa-thumbs-down" aria-hidden="true"></i>Dislikes: &nbsp;<?= $data['dislike_count'] ?>
+                  <i class="fa fa-thumbs-down" aria-hidden="true"></i>Dislikes: &nbsp;(<?= $dislikes ?>)
                 </button>
               </form>
             </div>
-
+            <!-- Comment  -->    
             
-
-
-
-
-
-
-
-
-            
-
-
-            <!-- Comment btn -->    
-            <div class="comment_btn">
+            <div id="comment_btn">
               <button class="btnOnClick" onclick="myComment()">Nouveau Commentaire</button>
             </div>
           </div>
           <br>
-          <?php
-            //
-            if(isset($_SESSION['error'])) {
-              echo '<div class="alert-danger" role="alert">' . $_SESSION['error'] . '</div>';
-              unset($_SESSION['error']);
-            }
-          ?>
+          
         </article>
         <script>
-          //Object oriented prog(faster to execute). class User
-          //private = prevent ouside code or derived classes from being modified.
-          //public = property can only be accessed within a class=myComment
+          //Object oriented prog(faster to execute). class myComment
+          
           //functions will not be executed when page loads but when called upon
 
           function myComment() {
@@ -132,7 +125,7 @@
           <?php
           // Show all the comments by time but ONLY show date from every user for this bank
           // Find the firstname from `accounts` by user_id from `posts`
-          // How to get date from type`datetime`: SELECT DATE_FORMAT(column_name, '%d-%m/%b-%Y') FROM tablename
+          // How to get date from type`datetime`: SELECT DATE_FORMAT(column_name, '%d-%m/%b-%Y') FROM table name
           $req = $connection->prepare("SELECT bank_id, user_id, comment, DATE_FORMAT(date_created, '%d-%m-%Y') AS date, first_name FROM posts
             JOIN accounts
             ON posts.user_id = accounts.username
@@ -144,10 +137,11 @@
               echo "<p>(Pas de commentaire encore)</p>";
             } else {
               while ($data = $req->fetch()) { ?>
-                <p><?php echo '<i class="fas fa-user-circle"></i> ' . '<span class="comment-name">' .
-                $data['first_name'] . '</span>'; ?><span class="comment-date"><?php echo '&nbsp;&nbsp;' . $data['date']; ?></span></p>
-                <p class="comment-text"><?php echo htmlspecialchars($data['comment']) ?></p>
+                <p><?php echo    '<span class="comment">' .
+                $data['first_name'] . '</span>'; ?><span class="comment"><?php echo '&nbsp;&nbsp;' . $data['date']; ?></span><br>
+                <?php echo htmlspecialchars($data['comment']) ?></p>
               <?php }
+              //close cursor to enabling loop
               $req->closeCursor();
               ?>
           </div><?php

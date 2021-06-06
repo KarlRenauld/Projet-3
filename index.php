@@ -17,6 +17,7 @@
      <?php
      // Find and list down all the acteurs
       include_once('config.php');
+      //Substring  returns values of max 120 char
       $req = $connection->prepare('SELECT id, logo, name, SUBSTRING(description, 1, 120) as detail FROM acteurs');
       $req->execute();
       if ($req->rowCount() == 0) {
@@ -24,7 +25,7 @@
       } 
       else {
         while ($row = $req->fetchAll()) {
-        //var_dump($row);
+        
         // How to show blob data to HTML? = just save the image name in database
         ?>
     <section class="gbaf-description">
@@ -38,6 +39,7 @@
     </section>
     <h2 class="h2-acteurs">Acteurs et Partenaires</h2>
     <!-- List of all the acteurs -->
+      <!--foreach loop (array as value) -->
       <?php foreach ($row as $entry) {
       ?>
       <section class="card">
