@@ -1,9 +1,7 @@
 <?php
 
 include_once('session.php');
-
 include_once('config.php');
-
 // Find id of the user:
 $req = $connection->prepare('SELECT * FROM accounts WHERE last_name=? AND first_name=? AND username=?');
 
@@ -11,7 +9,6 @@ $req-> execute([$lastname, $firstname, $username]);
 
 $row = $req->fetch(PDO::FETCH_ASSOC);
 // print_r($row);
-
 // Update all for this user:
 //User info is placed inside the input box to update. if needed to change user will change
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

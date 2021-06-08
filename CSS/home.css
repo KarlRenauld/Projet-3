@@ -166,30 +166,6 @@ h3 {
         border: none;
         padding-top: 50px;
     }
-    .alert-success {
-        position: relative;
-        top: 50%;
-        left: 25%;
-        width: 50%;
-        padding: 10px 0;
-        margin: 10px;
-        background-color: green;
-        border-radius: 26px;
-        color: white;
-        text-align: center;
-    }
-    .alert-danger {
-        position: relative;
-        top: 50%;
-        left: 25%;
-        width: 50%;
-        padding: 10px 0;
-        margin: 10px;
-        background-color: red;
-        border-radius: 26px;
-        color: white;
-        text-align: center;
-    }
 }
 
 
@@ -209,44 +185,8 @@ h3 {
     #middle-page {
         margin-bottom: 80px;
     }
-    .nav-toggler {
-        display: flex;
-    }
-    .header .nav {
-        position: absolute;
-        left: 0;
-        top: 100%;
-        width: 100%;
-        background-color: var(--color-1);
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        opacity: 0;
-        visibility: hidden;
-    }
-    .header .nav a {
-        margin-left: 20px;
-    }
-    .header .nav ul li {
-        display: block;
-        margin: 0;
-    }
-    .header #nav-check:checked~.nav {
-        opacity: 1;
-        visibility: visible;
-    }
-    .header #nav-check:focus~.nav-toggler {
-        box-shadow: 0 0 15px #000000;
-    }
-    .header #nav-check:checked~.nav-toggler span {
-        background-color: transparent;
-    }
-    .header #nav-check:checked~.nav-toggler span::before {
-        top: 0;
-        transform: rotate(45deg);
-    }
-    .header #nav-check:checked~.nav-toggler span::after {
-        top: 0;
-        transform: rotate(-45deg);
-    }
+    
+    
     .card {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 2.5fr;
@@ -260,73 +200,6 @@ h3 {
         margin-left: -70px;
         padding-top: 10px;
     }
-    .post .post-image {
-        width: 400px;
-        height: auto;
-    }
-    .username {
-        margin-top: 10px;
-        margin-left: -15px;
-    }
-    /* How to put username under the logo */
-    .logo-user {
-        display: grid;
-        grid-template-columns: 1fr;
-        align-items: center;
-        margin-left: 50px;
-        padding: 15px;
-    }
-    .comment-form,
-    .form-box {
-        background-color: transparent;
-        box-shadow: none;
-        border: none;
-        padding: 0;
-        margin-bottom: 150px;
-    }
-    .comment-list {
-        align-items: center;
-        padding: 50px;
-    }
-    select,
-    .form-box input[type="text"],
-    .form-box input[type="password"],
-    .comment-form input[type="text"],
-    .comment-form input[type="date"],
-    textarea {
-        width: 200px;
-    }
-    select:focus,
-    textarea:focus,
-    .form-box input[type="text"]:focus,
-    .form-box input[type="password"]:focus,
-    .comment-form input[type="text"]:focus,
-    .comment-form input[type="date"]:focus {
-        width: 250px;
-        border-color: #189AB4;
-    }
-    .alert-danger {
-        position: relative;
-        top: 50%;
-        left: 18%;
-        width: 60%;
-        padding: 10px 0;
-        margin: 10px;
-        background-color: red;
-        border-radius: 26px;
-        color: white;
-        text-align: center;
-    }
-    .alert-success {
-        position: relative;
-        top: 50%;
-        left: 18%;
-        width: 60%;
-        padding: 10px 0;
-        margin: 10px;
-        background-color: green;
-        border-radius: 26px;
-        color: white;
-        text-align: center;
-    }
+   
+    
 }

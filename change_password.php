@@ -13,17 +13,11 @@ if (!isset($username) || !isset($secretQuestion) || !isset($answer)) {
   header("Location: ./login.php", true, 302);
   exit();
 }
-
 include_once('config.php');
-
 // Find id of the user:
 $req = $connection->prepare('SELECT * FROM accounts WHERE username=? AND secret_question=? AND answer=?');
-
 $req-> execute([$username, $secretQuestion, $answer]);
-
 $row = $req->fetch(PDO::FETCH_ASSOC);
-
-
 // Update all for this user:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['recover'])) {

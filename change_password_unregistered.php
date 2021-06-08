@@ -23,7 +23,6 @@ $req-> execute([$username, $secretQuestion, $answer]);
 
 $row = $req->fetch(PDO::FETCH_ASSOC);
 // print_r($row);
-
 // Update all for this user:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['recover'])) {

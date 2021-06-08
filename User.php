@@ -70,6 +70,4 @@ $insertinfo = $connection->prepare("INSERT INTO accounts (last_name, first_name,
       echo '<p class="form-box"><a name="#resultat">Compte Valider.</a></p>';
    }
 }
-
-   
 ?>

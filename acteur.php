@@ -17,26 +17,16 @@
   <meta charset="utf-8">
 </head>
 <body>
-
   <?php
   include('config.php');
-
-
-
    $today = date("Y-m-d");
-
     if(isset($_GET['acteur'])) {
       //Set Cookies for use in getting information  during insertPost.php
-      setcookie("acteur_id", $_GET['acteur'], time()+(60*60*24));
-
-      
+      setcookie("acteur_id", $_GET['acteur'], time()+(60*60*24)); 
       // Get the acteur by id
       $req = $connection->prepare('SELECT * FROM acteurs WHERE id=?');
       $req->execute([$_GET['acteur']]);
       $data = $req->fetch();
-
-      
-      
       ?>
       <!-- Acteur's post -->
         <article class="post">
@@ -86,29 +76,13 @@
                 </button>
               </form>
             </div>
-            <!-- Comment  -->    
-            
+            <!-- Comment  -->     
             <div id="comment_btn">
-              <button class="btnOnClick" onclick="myComment()">Nouveau Commentaire</button>
+              <button class="btnOnClick" ">Nouveau Commentaire</button>
             </div>
           </div>
           <br>
-          
         </article>
-        <script>
-          //Object oriented prog(faster to execute). class myComment
-          
-          //functions will not be executed when page loads but when called upon
-
-          function myComment() {
-            let form = document.getElementById("comment");
-            if (form.style.display === "none") {
-              form.style.display = "block";
-            } else {
-              form.style.display = "none";
-            }
-          }
-        </script>
         <!-- Comment form -->
         <div id="comment" style="display: none">
           <form class="comment-form" action="insertPost.php" method="POST">
@@ -147,7 +121,6 @@
           </div><?php
         }
     }
-
 include_once('footer.html');
 ?>
 

@@ -1,10 +1,6 @@
 <?php
 
 include('config.php');
-
-
-  
-
 ?>
   <link rel="stylesheet" type="text/css" href="CSS/login.css">
   <img class="head" name="head" src="images/logo_gbaf.png" >
@@ -31,9 +27,6 @@ include('config.php');
   </form>
 <?php  
   include('User.php');
-?>
-<footer>
-<?php
   include('footer.html');  
 ?>
-</footer>
+
