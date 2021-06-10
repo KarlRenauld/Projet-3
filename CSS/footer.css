@@ -1,11 +1,12 @@
 
 
 footer {
-	width: 100vw;
-    position: relative;
+	overflow-x: hidden;
+   max-width: 100%;
+   min-width: 100%;
     color: white;
     background: black;
-    left: 0;
+    right: 220px;
     padding: 10px;
     text-align: center;
     height: 50px;
@@ -13,6 +14,6 @@ footer {
  }
 #container_footer a{
 	color: white;
-
-
-
+    
+	
+}

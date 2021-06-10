@@ -56,33 +56,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<title>Modification de Compte</title>
+<link rel="stylesheet" type="text/css" href="CSS/footer.css">
+<?php
 include_once('header.php');
 ?>
-    <form class="form-box" action="" method="POST">
+    <form class="form-box" method="POST" id="form-box">
       <h1>Modifier votre compte:</h1>
       <?php
           if (isset($error)) {
             echo '<div class="alert-danger" role="alert">' . $error . '</div><br>';
           }
       ?>
-      <label for="lastname">Nouveau nom(Entre 2 à 10 charactères): </label><br>
+      <label  id="lastname">Nouveau nom(Entre 2 à 10 charactères): </label><br>
       <input type="text" name="lastname" value="<?php if(isset($lastname)) echo $lastname; ?>"><br>
-      <label for="firstname">Nouveau prénom(Entre 2 à 10 charactères): </label><br>
+      <label id="firstname">Nouveau prénom(Entre 2 à 10 charactères): </label><br>
       <input type="text" name="firstname" value="<?php if(isset($firstname)) echo $firstname; ?>"><br>
-      <label for="username">Nouveau nom d'utilisateur(Entre 2 à 10 charactères): </label><br>
+      <label id="username">Nouveau nom d'utilisateur(Entre 2 à 10 charactères): </label><br>
       <input type="text" name="username" value="<?php if(isset($username)) echo $username; ?>"><br>
 
-      <label for="password">Nouveau mot de passe(Entre 3 à 10 charactères): </label><br>
+      <label id="password">Nouveau mot de passe(Entre 3 à 10 charactères): </label><br>
       <input type="password" name="password"><br>
 
-      <label for="secret_question">Choisir une question secrete: </label><br>
-      <select name="secret_question" id="secret_question">
+      <label id="secret_question">Choisir une question secrete: </label><br>
+      <select name="secret_question" >
         <option value="">--Choisir une option--</option>
         <option value="Quelle est votre couleur préférée?">Quelle est votre couleur préférée?</option>
         <option value="Quel est le nom de votre mère?">Quel est le nom de votre mère?</option>
         <option value="Où se trouve votre ville natale?">Où se trouve votre ville natale?</option>
       </select><br>
-      <label for="answer">Votre réponse(Plus que 2 charactères): </label><br>
+      <label id="answer">Votre réponse(Plus que 2 charactères): </label><br>
       <input type="text" name="answer" value="<?= $row['answer']; ?>"><br>
       <input type="submit" name="modify" value="Modifier">
     </form>

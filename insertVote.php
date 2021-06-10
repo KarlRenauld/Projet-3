@@ -24,8 +24,8 @@ include('config.php');
                $del = $connection->prepare('DELETE FROM likes WHERE id_article = ? AND id_membre = ?');
                $del->execute(array($getid,$sessionid));
             } else {
-               $ins = $connection->prepare('INSERT INTO likes (id_article, id_membre) VALUES (?, ?)');
-               $ins->execute(array($getid, $sessionid));
+               $ins = $connection->prepare('INSERT INTO likes (id_article, id_membre, user_id) VALUES (?, ?, (SELECT accounts.id FROM accounts WHERE accounts.username=?))');
+               $ins->execute(array($getid, $sessionid, $_SESSION['username']));
             }
             
          } 
@@ -39,8 +39,8 @@ include('config.php');
                $del = $connection->prepare('DELETE FROM dislikes WHERE id_article = ? AND id_membre = ?');
                $del->execute(array($getid,$sessionid));
             } else {
-               $ins = $connection->prepare('INSERT INTO dislikes (id_article, id_membre) VALUES (?, ?)');
-               $ins->execute(array($getid, $sessionid));
+               $ins = $connection->prepare('INSERT INTO dislikes (id_article, id_membre, user_id) VALUES (?, ?, (SELECT accounts.id FROM accounts WHERE accounts.username=?))');
+               $ins->execute(array($getid, $sessionid, $_SESSION['username']));
             }
          }
           header('Location: acteur.php?acteur='. $_COOKIE['acteur_id'] .'');

@@ -61,12 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     die();
   }
   
-  //Sha1 is a Hashing term for passwords
- $password = sha1($password);
+  //Password_hash(__, PASSWORD_DEFAULT) is a Hashing term for passwords
+  //More secured than Sha1 since its randomised and alot harder to decrypt
+ $password = password_hash($password, PASSWORD_DEFAULT);
 $insertinfo = $connection->prepare("INSERT INTO accounts (last_name, first_name, username, password, secret_question, answer) 
-         VALUES ('$lastName', '$firstName', '$userName', '$password', '$secretQuestion', '$answer')");
+         VALUES (?, ?, ?, ?, ?, ?)");
 
-  if ($insertinfo-> execute()) {
+  if ($insertinfo-> execute([$_POST['lastname'],  $_POST['firstname'],  $_POST['username'], $password, $secretQuestion, $_POST['answer']])) {
       echo '<p class="form-box"><a name="#resultat">Compte Valider.</a></p>';
    }
 }

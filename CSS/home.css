@@ -1,7 +1,10 @@
 
 
 /* index page */
-
+body{
+    overflow-x: hidden;
+    
+}
 #content {
     background: #FFFFFF;
 }
@@ -146,7 +149,8 @@ h3 {
 
 @media(max-width: 768px) {
     body {
-        width: 100vw;
+        overflow-x: hidden;
+        width: 100%;
         height: 100vh;
     }
     .header .nav ul {
@@ -176,6 +180,7 @@ h3 {
         font-size: 1.5rem;
     }
     body {
+        overflow-x: hidden;
         height: 100vh;
         width: 100vw;
         /* To keep lines/rows tight together */

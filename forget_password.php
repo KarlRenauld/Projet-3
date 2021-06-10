@@ -41,17 +41,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
+  <!DOCTYPE html>
+  <html lang="fr">
+  <head>
+    <title>Mot de Passe Oublier</title>
+    <link rel="stylesheet" type="text/css" href="CSS/footer.css">
   <link rel="stylesheet" type="text/css" href="CSS/forget_password.css">
-  <img class="head" name="head" src="images/logo_gbaf.png" >
-  <body >
-  <form id="head" class="form-box" action="" method="POST">
+  </head>
+ 
+  
+  <img class="head"  src="images/logo_gbaf.png" alt="logo_gbaf" >
+  
+  <form id="head" class="form-box"  method="POST">
     <h2>Récupérer votre compte avec la question secrète:</h2><br>
     <?php
         if (isset($error)) {
           echo '<div class="alert-danger" role="alert">' . $error . '</div><br>';
         }
     ?>
-    <label for="username">Nom d'utilisateur:</label><input type="text" name="username">
+    <label for="username">Nom d'utilisateur:</label><input type="text" name="username" id="username">
     <br>
     <label for="secret_question">Choisir la question secrète que vous avez enregistré: </label>
     <select name="secret_question" id="secret_question">
@@ -60,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <option value="Quel est le nom de votre mère?">Quel est le nom de votre mère?</option>
       <option value="Où se trouve votre ville natale?">Où se trouve votre ville natale?</option>
     </select><br>
-    <label for="answer">Votre réponse que vous avez enregistrée: </label><input type="text" name="answer" placeholder="Entrer votre réponse"><br>
+    <label for="answer">Votre réponse que vous avez enregistrée: </label><input type="text" name="answer" placeholder="Entrer votre réponse" id="answer"><br>
     <input type="submit" name="recover" value="Récupérer Mon Compte">
   </form>
   </body>

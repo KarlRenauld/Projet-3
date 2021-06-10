@@ -1,24 +1,32 @@
 <?php
   // Start a session
   session_start();
+  
+
   // Verify if user is connected, if not, redirect to Login page
+
   if(!isset($_SESSION["username"])){
     header("Location: login.php");
     exit(); 
   }
 ?>
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Acteurs </title>
+<html lang="fr">
+  <title>Acteurs</title>
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
   <?php include_once('header.php');?>
+  <link rel="stylesheet" type="text/css" href="CSS/footer.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="CSS/acteurs.css">
-  <meta charset="utf-8">
-</head>
-<body>
+
+
   <?php
   include('config.php');
+  //define ID for later use
+  $id = $connection-> prepare("SELECT id FROM accounts WHERE username = ? ");
+              $getid = $id-> execute([$_SESSION['username']]);         
+  
    $today = date("Y-m-d");
     if(isset($_GET['acteur'])) {
       //Set Cookies for use in getting information  during insertPost.php
@@ -78,37 +86,58 @@
             </div>
             <!-- Comment  -->     
             <div id="comment_btn">
-              <button class="btnOnClick" ">Nouveau Commentaire</button>
+              <button class="btnOnClick" onclick="myComment()">Nouveau Commentaire</button>
             </div>
           </div>
           <br>
         </article>
+        <script>
+           //Object oriented prog(faster to execute). class myComment.
+          //functions will not be executed when page loads but when called upon.
+          function myComment() {
+            let form = document.getElementById("comment");
+            if (form.style.display === "none") {
+              form.style.display = "block";
+            } else {
+              form.style.display = "none";
+            }
+          }
+        </script>
+        
         <!-- Comment form -->
         <div id="comment" style="display: none">
           <form class="comment-form" action="insertPost.php" method="POST">
               <label for="author">Prénom:</label><br><input type="text" name="author" id="author" value="<?php echo $_SESSION['username']; ?>">
               <label for="date">Date:</label><br><input type="date" name="date" id="date" value="<?= $today ?>"><br>
 
-              <label for="comment">Votre Commentaire:</label><br><textarea name="comment" id="comment" cols="80" rows="8"></textarea><br>
+              <label for="comment2">Votre Commentaire:</label><br><textarea name="comment" id="comment2" cols="80" rows="8"></textarea><br>
               <input type="submit" value="Envoyer">
           </form>
         </div>
           <!-- Comments list -->
+
         <div class="comments-list">
           <h2>Commentaires</h2>
           <?php
+
+        $sql = $connection-> prepare("SELECT comment_username FROM posts WHERE comment_username = ? AND bank_id = ?");
+                $sql-> execute([$_SESSION['username'], $_GET['acteur'] ]);
+                  //If Rowcount is higher than 0 then its allready taken
+               if ($sql->rowCount() > 0) {
+                 echo "Votre maximum nombres de commentaires a été émis.";
+                }  
           // Show all the comments by time but ONLY show date from every user for this bank
           // Find the firstname from `accounts` by user_id from `posts`
           // How to get date from type`datetime`: SELECT DATE_FORMAT(column_name, '%d-%m/%b-%Y') FROM table name
-          $req = $connection->prepare("SELECT bank_id, user_id, comment, DATE_FORMAT(date_created, '%d-%m-%Y') AS date, first_name FROM posts
+          $req = $connection->prepare("SELECT bank_id, comment_username, comment, DATE_FORMAT(date_created, '%d-%m-%Y') AS date, first_name FROM posts
             JOIN accounts
-            ON posts.user_id = accounts.username
+            ON posts.comment_username = accounts.username
             WHERE posts.bank_id = ?
             ORDER BY date_created DESC");
 
             $req->execute([$_GET['acteur']]);
             if ($req->rowCount() == 0) {
-              echo "<p>(Pas de commentaire encore)</p>";
+              echo "<p>(Il n'y a pas encore de commentaires.)</p>";
             } else {
               while ($data = $req->fetch()) { ?>
                 <p><?php echo    '<span class="comment">' .

@@ -41,19 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       }
       $newPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-      if (!isset($_POST['secret_question']) || $_POST['secret_question'] == '' || strlen($_POST['answer']) < 3) {
-        throw new Exception("Question secrete ou réponse non valides");
-      }
       $newSecretQuestion = $_POST['secret_question'];
       $newAnswer = $_POST['answer'];
 
-      $modify = $connection->prepare('UPDATE accounts SET  username=?, password=?,  secret_question=?, answer=? WHERE id=? LIMIT 1');
-      $modify->execute($newUserName, $newPassword, $newSecretQuestion,  $newAnswer, $row['id']);
-
-      $_SESSION['lastname'] = $newLastName;
-      $_SESSION['firstname'] = $newFirstName;
-      $_SESSION['username'] = $newUserName;
-
+      $modify = $connection->prepare('UPDATE accounts SET  username=?, password=? WHERE id=? ');
+      $modify->execute([$_POST['username'], $newPassword, $row['id']]);
       header("Location: ./login.php", true, 302);
       exit();
     } catch (Exception $e) {
@@ -80,14 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <label for="password">Nouveau mot de passe(Entre 3 à 10 charactères): </label><input type="password" name="password"><br>
 
-    <label for="secret_question">Choisir une question secrete: </label>
-    <select name="secret_question" id="secret_question">
-      <option value="">--Choisir une option--</option>
-      <option value="Quelle est votre couleur préférée?">Quelle est votre couleur préférée?</option>
-      <option value="Quel est le nom de votre mère?">Quel est le nom de votre mère?</option>
-      <option value="Où se trouve votre ville natale?">Où se trouve votre ville natale?</option>
-    </select><br>
-    <label for="answer">Votre réponse(Plus que 2 charactères): </label><input type="text" name="answer" value="<?= $answer ?>"><br>
+   
     <input type="submit" name="recover" value="Enregistrer">
   </form><br><br><br><br>
 <?php

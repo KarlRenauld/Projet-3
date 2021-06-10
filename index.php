@@ -7,13 +7,20 @@
     exit(); 
   }
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <?php include('header.php') ?>
-  </head>
-  <body class="body">
+
+    <!DOCTYPE html>
+    <html lang="fr">
+    
+      <title>Index</title>
+       <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+       <link rel="stylesheet" type="text/css" href="CSS/footer.css">
       <link rel="stylesheet" type="text/css" href="CSS/home.css">
+    
+   
+    <?php include('header.php') ?>
+  
+     
      <?php
      // Find and list down all the acteurs
       include_once('config.php');

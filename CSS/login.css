@@ -1,7 +1,8 @@
-/*body{
-    background-color: red;
-}*/
+
 body {
+    overflow-x: hidden;
+   max-width: 100%;
+   min-width: 100%;
     height: 100vh;
     min-height: -webkit-fill-available;
     line-height: 1.5;
@@ -41,8 +42,11 @@ body {
 /* Media Query: iPad (Vertical), starting from 768px */
 
 @media(max-width: 768px) {
+    
     body {
-        width: 100vw;
+        overflow-x: hidden;
+        max-width: 100%;
+        min-width: 100%;
         height: 100vh;
     }
     
